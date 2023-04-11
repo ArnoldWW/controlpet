@@ -25,12 +25,20 @@ const login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    let regex = new RegExp(
+      "([!#-'*+/-9=?A-Z^-~-]+(.[!#-'*+/-9=?A-Z^-~-]+)*|\"([]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(.[!#-'*+/-9=?A-Z^-~-]+)*|[[\t -Z^-~]*])"
+    );
+
     //validation for form
     for (const key in userData) {
       if (userData[key].trim() === "") {
         console.log("empty", key);
         return toast.error("Todos los campos son obligatorios.");
       }
+    }
+
+    if (!regex.test(userData.email)) {
+      return toast.error("Correo no valido.");
     }
 
     if (userData.password < 6) {
