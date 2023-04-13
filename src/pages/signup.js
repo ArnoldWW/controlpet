@@ -27,9 +27,10 @@ const signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let regex = new RegExp(
+    const emailExpresion = new RegExp(
       "([!#-'*+/-9=?A-Z^-~-]+(.[!#-'*+/-9=?A-Z^-~-]+)*|\"([]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(.[!#-'*+/-9=?A-Z^-~-]+)*|[[\t -Z^-~]*])"
     );
+    const onlyLettersExpresion = new RegExp("^[a-zA-Z_ ]*$");
 
     //form validation
     for (const key in userData) {
@@ -39,7 +40,11 @@ const signup = () => {
       }
     }
 
-    if (!regex.test(userData.email)) {
+    if (!onlyLettersExpresion.test(userData.name)) {
+      return toast.error("Nombre no valido, deben ser solo letras.");
+    }
+
+    if (!emailExpresion.test(userData.email)) {
       return toast.error("Correo no valido.");
     }
 
