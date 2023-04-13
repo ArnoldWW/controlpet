@@ -5,7 +5,9 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
-  signInWithEmailAndPassword
+  signInWithEmailAndPassword,
+  sendEmailVerification,
+  updateProfile
 } from "../firebase";
 import { toast } from "react-hot-toast";
 
@@ -23,7 +25,7 @@ const AuthProvider = ({ children }) => {
   }, [loadingUserData]);
 
   //functions--
-  const createUser = async (email, password) => {
+  const createUser = async (name, email, password) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -32,27 +34,48 @@ const AuthProvider = ({ children }) => {
       );
       setCurrentUser(userCredential.user);
       setLoadingUserData(1);
-      router.push("/");
+      await updateUserProfile(name);
+      await sendEmailForVerifyAccount();
       toast.success("Cuenta creada!");
+      //router.push("/confirmAccount");
     } catch (error) {
       toast.error(error.message);
     }
   };
 
-  const logOut = () => {
-    signOut(auth)
-      .then(() => {
-        // Sign-out successful.
-        console.log("log out...");
-        setCurrentUser({});
-        setLoadingUserData(2);
-        toast.error("log out!");
-        router.push("/login");
-      })
-      .catch((error) => {
-        // An error happened.
-        console.error(error);
+  const sendEmailForVerifyAccount = async () => {
+    try {
+      await sendEmailVerification(auth.currentUser);
+      toast.success("Correo de verificacion enviado!");
+    } catch (error) {
+      toast.error(error);
+    }
+  };
+
+  const updateUserProfile = async (name = "") => {
+    try {
+      await updateProfile(auth.currentUser, {
+        displayName: name
       });
+      toast.success("Update user!");
+    } catch (error) {
+      toast.error(error);
+    }
+  };
+
+  const logOut = async () => {
+    const res = confirm("¿Deseas cerrar la sesion?");
+    if (!res) return;
+
+    try {
+      await signOut(auth);
+      setCurrentUser({});
+      setLoadingUserData(2);
+      router.push("/login");
+    } catch (error) {
+      // An error happened.
+      console.error(error);
+    }
   };
 
   const checkAuthStatus = (
@@ -63,12 +86,16 @@ const AuthProvider = ({ children }) => {
       onAuthStateChanged(auth, (user) => {
         if (user) {
           // User is signed in
-          console.log(user);
           setCurrentUser(user);
           setLoadingUserData(1);
 
+          if (!user.emailVerified) {
+            console.log("verifcacion:", user.emailVerified);
+            return router.push("/confirmAccount");
+          }
+
           if (redirectWithUser) {
-            router.push("/");
+            return router.push("/");
           }
         } else {
           // User is signed out
@@ -77,12 +104,13 @@ const AuthProvider = ({ children }) => {
           setLoadingUserData(2);
 
           if (redirectWithOutUser) {
-            router.push("/login");
+            return router.push("/login");
           }
         }
       });
     } catch (error) {
       console.error(error);
+      toast.error(error);
       setCurrentUser({});
       setLoadingUserData(2);
     }

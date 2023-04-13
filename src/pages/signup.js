@@ -8,6 +8,7 @@ const signup = () => {
   const { loadingUserData, createUser, checkAuthStatus } =
     useContext(AuthContext);
   const [userData, setUserData] = useState({
+    name: "",
     email: "",
     password: "",
     confirmpassword: ""
@@ -50,7 +51,7 @@ const signup = () => {
       return toast.error("Las contraseñas deben tener al menos 6 caracteres.");
     }
 
-    createUser(userData.email, userData.password);
+    createUser(userData.name, userData.email, userData.password);
   };
 
   if (loadingUserData === 0) {
@@ -65,12 +66,23 @@ const signup = () => {
         </div>
         <form onSubmit={handleSubmit}>
           <div className="my-5">
+            <label className="labelform">Nombre y apellido:</label>
+            <input
+              className="input"
+              name="name"
+              type="text"
+              placeholder="Ej. Jhon Sanchez"
+              value={userData.name}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="my-5">
             <label className="labelform">correo:</label>
             <input
               className="input"
               name="email"
               type="email"
-              placeholder="Tu correo"
+              placeholder="Ej. jhon@gmail.com"
               value={userData.email}
               onChange={handleChange}
             />

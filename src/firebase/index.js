@@ -5,17 +5,19 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
-  signInWithEmailAndPassword
+  signInWithEmailAndPassword,
+  sendEmailVerification,
+  updateProfile
 } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyA33kWkBlxohk53bH7YmrkSIR_2r-oRMKg",
-  authDomain: "controlpet-7bf17.firebaseapp.com",
-  projectId: "controlpet-7bf17",
-  storageBucket: "controlpet-7bf17.appspot.com",
-  messagingSenderId: "127050659986",
-  appId: "1:127050659986:web:54064731d235fd6e5d8e4b"
+  apiKey: process.env.NEXT_PUBLIC_APIKEY,
+  authDomain: process.env.NEXT_PUBLIC_AUTHDOMAIN,
+  projectId: process.env.NEXT_PUBLIC_PROJECTID,
+  storageBucket: process.env.NEXT_PUBLIC_STORAGEBUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_MESSAGINGSENDERID,
+  appId: process.env.NEXT_PUBLIC_APPID
 };
 
 // Initialize Firebase
@@ -29,5 +31,7 @@ export {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
-  signInWithEmailAndPassword
+  signInWithEmailAndPassword,
+  sendEmailVerification,
+  updateProfile
 };
