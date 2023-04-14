@@ -11,9 +11,17 @@
 }
 
 .btn {
-  @apply border my-2 py-2 px-5 capitalize cursor-pointer font-bold text-white bg-black hover:opacity-90;
+  @apply border py-2 px-5 capitalize cursor-pointer font-bold text-white bg-black hover:opacity-90;
 }
 
 .link {
   @apply text-blue-900 underline text-sm;
+}
+
+.container {
+  @apply max-w-[90%] w-[900px] mx-auto;
+}
+
+.heading1 {
+  @apply font-bold text-2xl;
 }

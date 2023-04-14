@@ -1,4 +1,5 @@
 import Layout from "@/components/Layout";
+import Logo from "@/components/Logo";
 import AuthContext from "@/context/AuthContext";
 import { useContext, useEffect } from "react";
 import { toast } from "react-hot-toast";
@@ -17,8 +18,7 @@ export default function Home() {
 
   return (
     <Layout>
-      <h1>Home</h1>
-      <button onClick={() => toast.success("click")}>click</button>
+      <h1 className="heading1 text-center">Mis Mascotas</h1>
     </Layout>
   );
 }
