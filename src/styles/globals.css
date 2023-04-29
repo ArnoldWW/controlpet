@@ -2,11 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-.labelform {
+.form-label {
   @apply font-bold block capitalize;
 }
 
 .input {
+  @apply border border-gray-900 w-full p-2 my-2;
+}
+
+.select {
+  @apply border border-gray-900 w-full p-2 my-2 bg-white capitalize;
+}
+
+.input-file {
   @apply border border-gray-900 w-full p-2 my-2;
 }
 
@@ -19,7 +27,7 @@
 }
 
 .container {
-  @apply max-w-[90%] w-[900px] mx-auto;
+  @apply max-w-[90%] w-[800px] mx-auto;
 }
 
 .heading1 {

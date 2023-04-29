@@ -13,7 +13,9 @@ const Header = () => {
       </Link>
       <nav className="flex items-center list-none">
         <li className="p-2">
-          <Link href="/">Mascotas</Link>
+          <Link href="/" className="hover:underline">
+            Mis Mascotas
+          </Link>
         </li>
         <li className="p-2">
           <Link href="/contact">Contact</Link>

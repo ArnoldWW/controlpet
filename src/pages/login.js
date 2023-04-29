@@ -60,7 +60,7 @@ const login = () => {
         </div>
         <form onSubmit={handleSubmit}>
           <div className="my-5">
-            <label className="labelform">correo:</label>
+            <label className="form-label">correo:</label>
             <input
               className="input"
               name="email"
@@ -71,7 +71,7 @@ const login = () => {
             />
           </div>
           <div className="my-5">
-            <label className="labelform">contraseña:</label>
+            <label className="form-label">contraseña:</label>
             <input
               className="input"
               name="password"

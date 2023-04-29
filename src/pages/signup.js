@@ -71,7 +71,7 @@ const signup = () => {
         </div>
         <form onSubmit={handleSubmit}>
           <div className="my-5">
-            <label className="labelform">Nombre y apellido:</label>
+            <label className="form-label">Nombre y apellido:</label>
             <input
               className="input"
               name="name"
@@ -82,7 +82,7 @@ const signup = () => {
             />
           </div>
           <div className="my-5">
-            <label className="labelform">correo:</label>
+            <label className="form-label">correo:</label>
             <input
               className="input"
               name="email"
@@ -93,7 +93,7 @@ const signup = () => {
             />
           </div>
           <div className="my-5">
-            <label className="labelform">contraseña:</label>
+            <label className="form-label">contraseña:</label>
             <input
               className="input"
               name="password"
@@ -104,7 +104,7 @@ const signup = () => {
             />
           </div>
           <div className="my-5">
-            <label className="labelform">confirma tu contraseña:</label>
+            <label className="form-label">confirma tu contraseña:</label>
             <input
               className="input"
               name="confirmpassword"
