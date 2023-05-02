@@ -9,7 +9,26 @@ import {
   sendEmailVerification,
   updateProfile
 } from "firebase/auth";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  collection,
+  query,
+  where,
+  getDocs,
+  getDoc,
+  deleteDoc,
+  updateDoc
+} from "firebase/firestore";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+  uploadBytes,
+  deleteObject
+} from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -27,6 +46,7 @@ const app = initializeApp(firebaseConfig);
 //modules --
 const auth = getAuth(app);
 const db = getFirestore(app);
+const storage = getStorage();
 
 //exports --
 export {
@@ -39,4 +59,24 @@ export {
   updateProfile
 };
 
-export { db, doc, setDoc };
+export {
+  db,
+  doc,
+  setDoc,
+  collection,
+  query,
+  where,
+  getDocs,
+  getDoc,
+  deleteDoc,
+  updateDoc
+};
+
+export {
+  storage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+  uploadBytes,
+  deleteObject
+};

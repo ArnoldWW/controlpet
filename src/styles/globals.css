@@ -22,6 +22,10 @@
   @apply border py-2 px-5 capitalize cursor-pointer font-bold text-white bg-black hover:opacity-90;
 }
 
+.disabled-btn {
+  @apply opacity-30 hover:cursor-not-allowed hover:opacity-30;
+}
+
 .link {
   @apply text-blue-900 underline text-sm;
 }
@@ -31,5 +35,9 @@
 }
 
 .heading1 {
-  @apply font-bold text-2xl;
+  @apply font-bold capitalize text-2xl my-5;
+}
+
+.heading2 {
+  @apply font-bold capitalize text-xl my-3;
 }

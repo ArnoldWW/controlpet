@@ -1,41 +1,68 @@
-import Layout from "@/components/Layout";
-import AuthContext from "@/context/AuthContext";
+import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
-import { useContext, useEffect } from "react";
+import PetContext from "@/context/PetContext";
+import AuthContext from "@/context/AuthContext";
+import Layout from "@/components/Layout";
+import PetList from "@/components/PetList";
 
 export default function Home() {
-  const { loadingUserData, currentUser, checkAuthStatus } =
-    useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
+  const { loadingPets, pets, getPets } = useContext(PetContext);
+  const [filter, setFilter] = useState("");
 
   useEffect(() => {
-    checkAuthStatus(false, true);
-  }, []);
+    if (filter === "") {
+      getPets();
+    } else {
+      getPets(filter);
+    }
+  }, [currentUser, loadingPets, filter]);
 
-  if (loadingUserData === 0) {
-    return <h1>loading...</h1>;
+  const handleChange = (e) => {
+    setFilter(e.target.value);
+  };
+
+  if (loadingPets) {
+    return (
+      <Layout>
+        <p>loading...</p>
+      </Layout>
+    );
+  }
+
+  if (!loadingPets && pets.lenght === 0) {
+    return (
+      <Layout>
+        <p>No hay mascotas</p>
+      </Layout>
+    );
   }
 
   return (
     <Layout>
-      <h1 className="heading1 text-center">Mis Mascotas</h1>
-      <section>
-        <select>
-          <option>-</option>
-          <option>1</option>
-          <option>2</option>
-        </select>
+      <>
+        <h1 className="heading1 text-center">Mis mascotas</h1>
+        <section className="flex justify-between items-center my-8">
+          <select
+            className="py-2 p-2 border min-w-[200px] border-black bg-white"
+            onChange={handleChange}
+          >
+            <option value="">Todos</option>
+            <option value="saludable">Saludable</option>
+            <option value="recuperacion">Recuperacion</option>
+            <option value="enfermo">Enfermo</option>
+          </select>
 
-        <Link href="/create-pet" className="btn">
-          Crear mascota
-        </Link>
-      </section>
-      <section className="my-5">
-        <ul>
-          <li>Mascota 1</li>
-
-          <li>Mascota 2</li>
-        </ul>
-      </section>
+          <Link href="/create-pet" className="btn">
+            Crear mascota
+          </Link>
+        </section>
+        <section className="my-5">
+          <ul>
+            <PetList pets={pets} />
+          </ul>
+        </section>
+      </>
     </Layout>
   );
 }

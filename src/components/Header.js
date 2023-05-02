@@ -2,16 +2,16 @@ import AuthContext from "@/context/AuthContext";
 import Link from "next/link";
 import { useContext } from "react";
 import Logo from "./Logo";
+import PetContext from "@/context/PetContext";
 
 const Header = () => {
   const { logOut } = useContext(AuthContext);
-
   return (
-    <header className="container py-2 my-10 border-b flex justify-between w-full">
+    <header className="container py-2 my-10 border-b flex justify-between w-full sticky top-0 bg-white">
       <Link href="/">
         <Logo />
       </Link>
-      <nav className="flex items-center list-none">
+      <ul className="flex items-center list-none">
         <li className="p-2">
           <Link href="/" className="hover:underline">
             Mis Mascotas
@@ -20,10 +20,15 @@ const Header = () => {
         <li className="p-2">
           <Link href="/contact">Contact</Link>
         </li>
-        <button onClick={logOut} className="btn ml-3">
+        <button
+          onClick={() => {
+            logOut();
+          }}
+          className="btn ml-3"
+        >
           Cerrar Sesion
         </button>
-      </nav>
+      </ul>
     </header>
   );
 };

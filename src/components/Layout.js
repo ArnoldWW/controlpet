@@ -11,13 +11,20 @@ const Layout = ({ children }) => {
   }, []);
 
   if (loadingUserData === 0) {
-    return <h1>loading...</h1>;
+    return (
+      <>
+        <Header />
+        <main className="container my-10">
+          <h1 className="heading1">Cargando usuario...</h1>
+        </main>
+      </>
+    );
   }
 
   return (
     <>
       <Header />
-      <main className="container my-10 p-5">{children}</main>
+      <main className="container my-10">{children}</main>
       <footer className="container border-t text-center p-5">
         Todos los derechos reservados &copy; controlpet.
       </footer>
