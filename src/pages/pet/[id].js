@@ -55,32 +55,35 @@ const Pet = () => {
             <h2 className="heading2">Detalles de la mascota</h2>
 
             <ul className="list-disc">
-              <li className="font-bold">
+              <li className="font-bold my-3">
                 Nombre: <span className="font-normal">{pet.name}</span>
               </li>
-              <li className="font-bold">
+              <li className="font-bold my-3">
+                Edad: <span className="font-normal">{pet.age} años</span>
+              </li>
+              <li className="font-bold my-3">
                 Peso: <span className="font-normal">{pet.weight} KG</span>
               </li>
 
-              <li className="font-bold">
+              <li className="font-bold my-3">
                 Color: <span className="font-normal">{pet.color}</span>
               </li>
 
-              <li className="font-bold">
+              <li className="font-bold my-3">
                 Estado: <span className="font-normal">{pet.status}</span>
               </li>
 
-              <li className="font-bold">
+              <li className="font-bold my-3">
                 Tipo: <span className="font-normal">{pet.type}</span>
               </li>
 
-              <li className="font-bold">
-                Tipo alimentacion:{" "}
+              <li className="font-bold my-3">
+                Tipo de alimentacion:
                 <span className="font-normal">{pet.feeding}</span>
               </li>
 
-              <li className="font-bold">
-                Detalles de alimentacion:{" "}
+              <li className="font-bold my-3">
+                Detalles de salud y alimentacion:{" "}
                 <span className="font-normal">{pet.feedingDetails}</span>
               </li>
             </ul>

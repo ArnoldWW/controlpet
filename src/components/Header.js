@@ -2,7 +2,6 @@ import AuthContext from "@/context/AuthContext";
 import Link from "next/link";
 import { useContext } from "react";
 import Logo from "./Logo";
-import PetContext from "@/context/PetContext";
 
 const Header = () => {
   const { logOut } = useContext(AuthContext);
@@ -16,9 +15,6 @@ const Header = () => {
           <Link href="/" className="hover:underline">
             Mis Mascotas
           </Link>
-        </li>
-        <li className="p-2">
-          <Link href="/contact">Contact</Link>
         </li>
         <button
           onClick={() => {

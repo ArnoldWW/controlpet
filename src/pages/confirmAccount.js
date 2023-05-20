@@ -10,11 +10,10 @@ const confirmAccount = () => {
 
   useEffect(() => {
     checkAuthStatus(false, true);
-
     if (currentUser.emailVerified) {
       return router.push("/");
     }
-  }, [currentUser]);
+  }, []);
 
   if (loadingUserData === 0) {
     return <h1>loading...</h1>;

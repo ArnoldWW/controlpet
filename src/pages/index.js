@@ -11,29 +11,27 @@ export default function Home() {
   const [filter, setFilter] = useState("");
 
   useEffect(() => {
-    if (filter === "") {
-      getPets();
-    } else {
-      getPets(filter);
-    }
-  }, [currentUser, loadingPets, filter]);
+    if (!currentUser.uid) return;
+
+    getPets(filter);
+  }, [currentUser, filter]);
 
   const handleChange = (e) => {
     setFilter(e.target.value);
   };
 
-  if (loadingPets) {
+  if (loadingPets === 3) {
     return (
       <Layout>
-        <p>loading...</p>
-      </Layout>
-    );
-  }
+        <div className="flex justify-center flex-col">
+          <h1 className="heading1 text-center">
+            Aún no tienes mascotas creadas.
+          </h1>
 
-  if (!loadingPets && pets.lenght === 0) {
-    return (
-      <Layout>
-        <p>No hay mascotas</p>
+          <Link href="/create-pet" className="btn">
+            Crear mascota
+          </Link>
+        </div>
       </Layout>
     );
   }
@@ -58,9 +56,7 @@ export default function Home() {
           </Link>
         </section>
         <section className="my-5">
-          <ul>
-            <PetList pets={pets} />
-          </ul>
+          <PetList pets={pets} />
         </section>
       </>
     </Layout>

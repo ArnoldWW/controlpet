@@ -30,7 +30,8 @@ const PetProvider = ({ children }) => {
   const { currentUser, loadingUserData } = useContext(AuthContext);
   const [isSubmittingForm, setIsSubmittingForm] = useState(false);
   const [pets, setPets] = useState([]);
-  const [loadingPets, setLoadingPets] = useState(true);
+  /* 0 loading - 1 load - 2 not found in category - 3 not found in all categories */
+  const [loadingPets, setLoadingPets] = useState(0);
 
   useEffect(() => {
     if (loadingUserData === 2) {
@@ -90,37 +91,45 @@ const PetProvider = ({ children }) => {
   //get a pet
   const getPets = async (filter = "") => {
     try {
-      if (currentUser.uid) {
-        console.log("obtener mascotas");
-        let q;
+      setLoadingPets(0);
+      console.log("obtener mascotas");
+      let q;
 
-        if (filter === "") {
-          q = query(
-            collection(db, "pets"),
-            where("owner", "==", currentUser.uid)
-          );
-        } else {
-          q = query(
-            collection(db, "pets"),
-            where("owner", "==", currentUser.uid),
-            where("status", "==", filter)
-          );
-        }
-
-        const querySnapshot = await getDocs(q);
-        const petsList = [];
-
-        querySnapshot.forEach((doc) => {
-          petsList.push(doc.data());
-        });
-
-        setLoadingPets(false);
-        console.log(petsList);
-        setPets(petsList);
+      if (filter === "") {
+        q = query(
+          collection(db, "pets"),
+          where("owner", "==", currentUser.uid)
+        );
+      } else {
+        q = query(
+          collection(db, "pets"),
+          where("owner", "==", currentUser.uid),
+          where("status", "==", filter)
+        );
       }
+
+      const querySnapshot = await getDocs(q);
+      const petsList = [];
+
+      querySnapshot.forEach((doc) => {
+        petsList.push(doc.data());
+      });
+
+      if (petsList.length === 0 && filter === "") {
+        setPets(petsList);
+        return setLoadingPets(3);
+      }
+
+      if (petsList.length === 0) {
+        setPets(petsList);
+        return setLoadingPets(2);
+      }
+
+      setLoadingPets(1);
+      setPets(petsList);
     } catch (error) {
       console.log(error);
-      setLoadingPets(false);
+      setLoadingPets(2);
     }
   };
 

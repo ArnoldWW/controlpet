@@ -55,15 +55,15 @@ const COLORS = [
 const PETTYPE = [
   {
     id: 1,
-    option: "mamifero"
+    option: "perro"
   },
   {
     id: 2,
-    option: "reptil"
+    option: "gato"
   },
   {
     id: 3,
-    option: "anfibio"
+    option: "conejo"
   },
   {
     id: 4,
@@ -75,16 +75,7 @@ const PETTYPE = [
   },
   {
     id: 6,
-    option: "aracnido"
-  },
-  {
-    id: 7,
-    option: "artópodo"
-  },
-  ,
-  {
-    id: 8,
-    option: "insecto"
+    option: "otro"
   }
 ];
 const FEEDING = [
@@ -189,26 +180,28 @@ const PetForm = ({ petToUpdate }) => {
         />
       </div>
 
-      <div className="my-5">
-        <label className="form-label">edad (años)</label>
-        <input
-          name="age"
-          type="number"
-          value={petData.age}
-          onChange={handleChange}
-          className="input"
-        />
-      </div>
+      <div className="my-5 flex justify-between gap-5">
+        <div className="w-full">
+          <label className="form-label">edad (años)</label>
+          <input
+            name="age"
+            type="number"
+            value={petData.age}
+            onChange={handleChange}
+            className="input"
+          />
+        </div>
 
-      <div className="my-5">
-        <label className="form-label">Peso (kg)</label>
-        <input
-          name="weight"
-          type="number"
-          value={petData.weight}
-          onChange={handleChange}
-          className="input"
-        />
+        <div className="w-full">
+          <label className="form-label">Peso (kg)</label>
+          <input
+            name="weight"
+            type="number"
+            value={petData.weight}
+            onChange={handleChange}
+            className="input"
+          />
+        </div>
       </div>
 
       <div className="my-5">
@@ -236,44 +229,47 @@ const PetForm = ({ petToUpdate }) => {
           onChange={handleChange}
           className="select"
         >
+          <option value="">-</option>
           {STATUS.map(({ id, option }) => (
             <option key={id}>{option}</option>
           ))}
         </select>
       </div>
 
-      <div className="my-5">
-        <label className="form-label">Tipo</label>
-        <select
-          name="type"
-          value={petData.type}
-          onChange={handleChange}
-          className="select"
-        >
-          <option value="">-</option>
-          {PETTYPE.map(({ id, option }) => (
-            <option key={id}>{option}</option>
-          ))}
-        </select>
+      <div className="my-5 flex justify-between gap-5">
+        <div className="w-full">
+          <label className="form-label">Tipo</label>
+          <select
+            name="type"
+            value={petData.type}
+            onChange={handleChange}
+            className="select"
+          >
+            <option value="">-</option>
+            {PETTYPE.map(({ id, option }) => (
+              <option key={id}>{option}</option>
+            ))}
+          </select>
+        </div>
+
+        <div className="w-full">
+          <label className="form-label">Tipo de alimentacion</label>
+          <select
+            name="feeding"
+            value={petData.feeding}
+            onChange={handleChange}
+            className="select"
+          >
+            <option value="">-</option>
+            {FEEDING.map(({ id, option }) => (
+              <option key={id}>{option}</option>
+            ))}
+          </select>
+        </div>
       </div>
 
       <div className="my-5">
-        <label className="form-label">Tipo de alimentacion</label>
-        <select
-          name="feeding"
-          value={petData.feeding}
-          onChange={handleChange}
-          className="select"
-        >
-          <option value="">-</option>
-          {FEEDING.map(({ id, option }) => (
-            <option key={id}>{option}</option>
-          ))}
-        </select>
-      </div>
-
-      <div className="my-5">
-        <label className="form-label">Detalles sobre la alimentacion</label>
+        <label className="form-label">Detalles de salud y alimentacion:</label>
         <textarea
           name="feedingDetails"
           value={petData.feedingDetails}

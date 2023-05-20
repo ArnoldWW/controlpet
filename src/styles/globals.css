@@ -19,7 +19,7 @@
 }
 
 .btn {
-  @apply border py-2 px-5 capitalize cursor-pointer font-bold text-white bg-black hover:opacity-90;
+  @apply text-center border py-2 px-5 capitalize cursor-pointer font-bold text-white bg-black hover:opacity-90;
 }
 
 .disabled-btn {

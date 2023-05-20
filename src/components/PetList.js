@@ -1,14 +1,17 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import PetContext from "@/context/PetContext";
 
 const PetList = ({ pets }) => {
-  useEffect(() => {
-    console.log(pets);
-  }, []);
+  const { loadingPets } = useContext(PetContext);
 
-  if (pets.length === 0) {
-    return <p>No hay mascotas</p>;
+  if (loadingPets === 0) {
+    return <p>cargando...</p>;
+  }
+
+  if (loadingPets === 2) {
+    return <p>No hay mascotas en esta categoria</p>;
   }
 
   return (
@@ -26,8 +29,9 @@ const PetList = ({ pets }) => {
           </div>
           <div className="flex flex-1 flex-col justify-center gap-4">
             <p className="text-lg font-bold capitalize">
-              {pet.name} ({pet.status})
+              {pet.name} ({pet.type})
             </p>
+            <p>Estado: {pet.status}</p>
             <Link className="block btn text-center" href={`/pet/${pet.id}`}>
               Ver Detalles
             </Link>
